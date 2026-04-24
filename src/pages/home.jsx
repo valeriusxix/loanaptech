@@ -1,4 +1,4 @@
-import react from 'react';
+import React from 'react';
 import './home.css';
 import { Link } from 'react-router-dom';
 
@@ -12,7 +12,7 @@ function Home()  {
 
          <div className='hero-subtitle'>Get instant personal loans up to $50,000 with low interest rates and flexible repayment options. </div>
           
-         <link to="/apply" className='hero-cta-btn'>Apply Now</link>
+         <Link to="/apply" className='hero-cta-btn'>Apply Now</Link>
             </div>
 
             <div className='features-grid'>
@@ -41,7 +41,7 @@ function Home()  {
                 <Link to="/status" className='home-link'>Check Loan Status</Link>
                 {'.'}
 
-                <link to='/dashboard' className='home-link'>Go to Dashboard</link>
+                <Link to='/dashboard' className='home-link'>Go to Dashboard</Link>
             </p>
            </div>
         

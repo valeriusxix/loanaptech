@@ -12,7 +12,7 @@ function Navbar() {
   useEffect(() => {
 
     checkAuth();
-  }, [location]); 
+  }, [location.pathname]); 
 
   const checkAuth = async () => {
     try {
@@ -48,52 +48,52 @@ function Navbar() {
   };
 
   return (
-    <nav className="navbar">
+    <nav className="navbar" aria-label="Main navigation">
       <div className="navbar-container">
 
         {/* Logo */}
-        <Link to="/" className="navbar-logo">
+        <Link to="/" className="navbar-logo" aria-label="LoanAptech home">
           LoanAptech
         </Link>
 
         {/* Desktop Menu */}
-        <ul className="navbar-menu">
-          <li>
-            <Link to="/" className={isActive("/") ? "nav-link active" : "nav-link"}>
+        <ul className="navbar-menu" role="menubar">
+          <li role="none">
+            <Link to="/" className={isActive("/") ? "nav-link active" : "nav-link"} role="menuitem">
               Home
             </Link>
           </li>
 
-          <li>
-            <Link to="/loans" className={isActive("/loans") ? "nav-link active" : "nav-link"}>
+          <li role="none">
+            <Link to="/loans" className={isActive("/loans") ? "nav-link active" : "nav-link"} role="menuitem">
               Loans
             </Link>
           </li>
 
-          <li>
-            <Link to="/about" className={isActive("/about") ? "nav-link active" : "nav-link"}>
+          <li role="none">
+            <Link to="/about" className={isActive("/about") ? "nav-link active" : "nav-link"} role="menuitem">
               About
             </Link>
           </li>
 
-          <li>
-            <Link to="/contact" className={isActive("/contact") ? "nav-link active" : "nav-link"}>
+          <li role="none">
+            <Link to="/contact" className={isActive("/contact") ? "nav-link active" : "nav-link"} role="menuitem">
               Contact
             </Link>
           </li>
 
           {/* Logged-in only */}
           {user && (
-            <li>
-              <Link to="/apply" className={isActive("/apply") ? "nav-link active" : "nav-link"}>
+            <li role="none">
+              <Link to="/apply" className={isActive("/apply") ? "nav-link active" : "nav-link"} role="menuitem">
                 Apply Now
               </Link>
             </li>
           )}
 
           {user && (
-            <li>
-              <Link to="/dashboard" className="nav-cta">
+            <li role="none">
+              <Link to="/dashboard" className="nav-cta" role="menuitem" aria-label="Go to your dashboard">
                 Dashboard
               </Link>
             </li>
@@ -102,14 +102,14 @@ function Navbar() {
           {/* Logged-out only */}
           {!user && (
             <>
-              <li>
-                <Link to="/login" className="nav-link">
+              <li role="none">
+                <Link to="/login" className="nav-link" role="menuitem">
                   Login
                 </Link>
               </li>
 
-              <li>
-                <Link to="/signup" className="nav-cta">
+              <li role="none">
+                <Link to="/signup" className="nav-cta" role="menuitem">
                   Sign Up
                 </Link>
               </li>
@@ -118,8 +118,13 @@ function Navbar() {
 
           {/* Logout */}
           {user && (
-            <li>
-              <button onClick={handleLogout} className="logout-btn">
+            <li role="none">
+              <button 
+                onClick={handleLogout} 
+                className="logout-btn"
+                role="menuitem"
+                aria-label="Logout from your account"
+              >
                 Logout
               </button>
             </li>
@@ -127,18 +132,26 @@ function Navbar() {
         </ul>
 
         {/* Mobile Toggle */}
-        <div
+        <button
           className="navbar-toggle"
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+          aria-label={mobileMenuOpen ? "Close navigation menu" : "Open navigation menu"}
+          aria-expanded={mobileMenuOpen}
+          aria-controls="mobile-menu"
         >
           <span className="bar"></span>
           <span className="bar"></span>
           <span className="bar"></span>
-        </div>
+        </button>
       </div>
 
       {/* Mobile Menu */}
-      <div className={`mobile-menu ${mobileMenuOpen ? "open" : ""}`}>
+      <div 
+        id="mobile-menu"
+        className={`mobile-menu ${mobileMenuOpen ? "open" : ""}`}
+        role="navigation"
+        aria-label="Mobile navigation"
+      >
         <Link to="/" className="mobile-link" onClick={() => setMobileMenuOpen(false)}>
           Home
         </Link>
@@ -186,6 +199,7 @@ function Navbar() {
               handleLogout();
               setMobileMenuOpen(false);
             }}
+            aria-label="Logout from your account"
           >
             Logout
           </button>

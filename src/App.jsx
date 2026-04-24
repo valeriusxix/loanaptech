@@ -1,38 +1,40 @@
-import React from 'react'
-import './App.css'
-import {BrowserRouter as Router, Routes, Route} from 'react-router-dom'
-import Navbar from './components/navbar'
+import React from "react";
+import "./App.css";
+import About from "./components/About";
+import Footer from "./components/Footer";
+import Contact from "./components/Contact";
+import Privacy from "./components/Privacy";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import Terms from "./components/Terms";
+import Faq from "./components/Faq";
+import Home from "./pages/Home";
+import Navbar from "./components/navbar";
+import Apply from "./components/apply";
+import Signup from "./pages/signup";
+import ErrorBoundary from "./components/ErrorBoundary";
 
-import Home from './pages/home'
-import Signup from './pages/signup'
-import Apply from './components/apply'
-import Contact from './components/contact'
-import About from './components/About'
-import Privacy from './components/privacy'
-import Faq from './components/faq'
-import Footer from './components/footer'
 
-function App() {
+export default function APP() {
   return (
-    <Router>
-    <div className="App">
-      <Navbar />
-      <main style={{minHeight: '100vh', paddingTop: '80px'}}></main>
-      <Routes>
-        {/*public routes */}
-        <Route path="/" element={<Home />} />
-        <Route path="/loan-products" element={<LoanProducts />} />
-        <Route path="/apply" element={<Apply />} />
-        <Route path="/contact" element={<Contact />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/privacy" element={<Privacy />} />
-      </Routes>
-      <Footer />
-    </div>
-
-    </Router>
-  )
+    <ErrorBoundary>
+      <Router>
+        <div className="APP">
+          <Navbar />
+          <main style={{ minHeight: '100vh', paddingTop: '80px' }}>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/contact" element={<Contact />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/privacy" element={<Privacy />} />
+              <Route path="/terms" element={<Terms />} />
+              <Route path="/faq" element={<Faq />} />
+              <Route path="/apply" element={<Apply />} />
+              <Route path="/signup" element={<Signup />} />
+            </Routes>
+          </main>
+          <Footer />
+        </div>
+      </Router>
+    </ErrorBoundary>
+  );
 }
-
-
-export default App

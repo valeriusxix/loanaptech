@@ -74,57 +74,101 @@ const Signup = () => {
 
   return (
     <div className="auth-container">
-        <h2>Create your account</h2>
+        <h1>Create your account</h1>
+        <p>Sign up to start your loan application journey</p>
 
         <form onSubmit={handleSubmit}>
-            {error && <p className="error-message">{error}</p>}
+            {error && <div className="error-message" role="alert">{error}</div>}
             
-            <input
-             type="text" 
-             name="name"
-             placeholder="Full Name"
-             value={formData.name}
-             onChange={handleChange}
-             required/>
+            <div className="form-group">
+              <label htmlFor="name">Full Name</label>
+              <input
+                id="name"
+                type="text" 
+                name="name"
+                placeholder="John Doe"
+                value={formData.name}
+                onChange={handleChange}
+                required
+                aria-label="Full name"
+                aria-describedby="name-error"
+              />
+            </div>
 
-             <input
-              type="email"
-              name="email"
-              placeholder="Email Address"
-              value={formData.email}
-              onChange={handleChange}
-              required />
+            <div className="form-group">
+              <label htmlFor="email">Email Address</label>
+              <input
+                id="email"
+                type="email"
+                name="email"
+                placeholder="john@example.com"
+                value={formData.email}
+                onChange={handleChange}
+                required
+                aria-label="Email address"
+                aria-describedby="email-error"
+              />
+            </div>
 
-              <input type="tel"
-              name="phone"
-              placeholder="Phone number" 
-              value={formData.phone}
-              onChange={handleChange}
-              required/>
+            <div className="form-group">
+              <label htmlFor="phone">Phone Number</label>
+              <input
+                id="phone"
+                type="tel"
+                name="phone"
+                placeholder="+1 (555) 123-4567"
+                value={formData.phone}
+                onChange={handleChange}
+                required
+                aria-label="Phone number"
+                aria-describedby="phone-error"
+              />
+            </div>
 
-              <input type="password"
-              name="password"
-              placeholder="Password"
-              value={formData.password}
-              onChange={handleChange}
-              required />
+            <div className="form-group">
+              <label htmlFor="password">Password</label>
+              <input
+                id="password"
+                type="password"
+                name="password"
+                placeholder="Minimum 6 characters"
+                value={formData.password}
+                onChange={handleChange}
+                required
+                aria-label="Password"
+                aria-describedby="password-error"
+              />
+              <small>Minimum 6 characters</small>
+            </div>
 
-              <input type="password"
-              name="confirmPassword"
-              placeholder="Confirm Password" 
-              value={formData.confirmPassword}
-              onChange={handleChange}
-              required/>
+            <div className="form-group">
+              <label htmlFor="confirmPassword">Confirm Password</label>
+              <input
+                id="confirmPassword"
+                type="password"
+                name="confirmPassword"
+                placeholder="Confirm Password" 
+                value={formData.confirmPassword}
+                onChange={handleChange}
+                required
+                aria-label="Confirm password"
+                aria-describedby="confirmPassword-error"
+              />
+            </div>
 
-              <button type="submit" disabled={loading}>
-                {loading ? "Signing Up..." : "Sign Up"}
-              </button>
+            <button 
+              type="submit" 
+              disabled={loading}
+              aria-busy={loading}
+            >
+              {loading ? "Signing Up..." : "Sign Up"}
+            </button>
 
-              <div className="login-link">
-                <Link to="/login">Already have an account? Login here.</Link>
-              </div>
+            <div className="login-link">
+              <Link to="/login">Already have an account? Login here.</Link>
+            </div>
         </form>
-        </div>
+    </div>
   );
 };
 
