@@ -11,7 +11,8 @@ connectDB();
 // Middleware
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    origin: ["http://localhost:5173", 
+      "https://loanaptech-psi.vercel.app"],
     credentials: true,
   }),
 );
@@ -20,7 +21,7 @@ app.use(cookieParser());
 
 // Routes
 app.use("/api/auth", require("./routes/auth"));
-app.use("/api/loans", require("./routes/loans"));
+app.use("/api/loans", require("./routes/loan"));
 
 // Test route
 app.get("/api/test", (req, res) => {
