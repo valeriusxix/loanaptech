@@ -217,6 +217,6 @@ const ApplyLoan = () => {
       </div>
     </>
   );
-};
+}
 
 export default ApplyLoan;
