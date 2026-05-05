@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import "./signup.css";
 
+const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
+
 const Signup = () => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
@@ -43,7 +45,7 @@ const Signup = () => {
     setLoading(true);
 
     try {
-      const response = await fetch("http://localhost:5000/api/auth/register", {
+      const response = await fetch(`${API_URL}/api/auth/register`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
@@ -74,100 +76,51 @@ const Signup = () => {
 
   return (
     <div className="auth-container">
-        <h1>Create your account</h1>
-        <p>Sign up to start your loan application journey</p>
+      <h1>Create your account</h1>
+      <p>Sign up to start your loan application journey</p>
 
-        <form onSubmit={handleSubmit}>
-            {error && <div className="error-message" role="alert">{error}</div>}
-            
-            <div className="form-group">
-              <label htmlFor="name">Full Name</label>
-              <input
-                id="name"
-                type="text" 
-                name="name"
-                placeholder="John Doe"
-                value={formData.name}
-                onChange={handleChange}
-                required
-                aria-label="Full name"
-                aria-describedby="name-error"
-              />
-            </div>
+      <form onSubmit={handleSubmit}>
+        {error && <div className="error-message" role="alert">{error}</div>}
 
-            <div className="form-group">
-              <label htmlFor="email">Email Address</label>
-              <input
-                id="email"
-                type="email"
-                name="email"
-                placeholder="john@example.com"
-                value={formData.email}
-                onChange={handleChange}
-                required
-                aria-label="Email address"
-                aria-describedby="email-error"
-              />
-            </div>
+        <div className="form-group">
+          <label htmlFor="name">Full Name</label>
+          <input id="name" type="text" name="name" placeholder="John Doe"
+            value={formData.name} onChange={handleChange} required />
+        </div>
 
-            <div className="form-group">
-              <label htmlFor="phone">Phone Number</label>
-              <input
-                id="phone"
-                type="tel"
-                name="phone"
-                placeholder="+1 (555) 123-4567"
-                value={formData.phone}
-                onChange={handleChange}
-                required
-                aria-label="Phone number"
-                aria-describedby="phone-error"
-              />
-            </div>
+        <div className="form-group">
+          <label htmlFor="email">Email Address</label>
+          <input id="email" type="email" name="email" placeholder="john@example.com"
+            value={formData.email} onChange={handleChange} required />
+        </div>
 
-            <div className="form-group">
-              <label htmlFor="password">Password</label>
-              <input
-                id="password"
-                type="password"
-                name="password"
-                placeholder="Minimum 6 characters"
-                value={formData.password}
-                onChange={handleChange}
-                required
-                aria-label="Password"
-                aria-describedby="password-error"
-              />
-              <small>Minimum 6 characters</small>
-            </div>
+        <div className="form-group">
+          <label htmlFor="phone">Phone Number</label>
+          <input id="phone" type="tel" name="phone" placeholder="+1 (555) 123-4567"
+            value={formData.phone} onChange={handleChange} required />
+        </div>
 
-            <div className="form-group">
-              <label htmlFor="confirmPassword">Confirm Password</label>
-              <input
-                id="confirmPassword"
-                type="password"
-                name="confirmPassword"
-                placeholder="Confirm Password" 
-                value={formData.confirmPassword}
-                onChange={handleChange}
-                required
-                aria-label="Confirm password"
-                aria-describedby="confirmPassword-error"
-              />
-            </div>
+        <div className="form-group">
+          <label htmlFor="password">Password</label>
+          <input id="password" type="password" name="password" placeholder="Minimum 6 characters"
+            value={formData.password} onChange={handleChange} required />
+          <small>Minimum 6 characters</small>
+        </div>
 
-            <button 
-              type="submit" 
-              disabled={loading}
-              aria-busy={loading}
-            >
-              {loading ? "Signing Up..." : "Sign Up"}
-            </button>
+        <div className="form-group">
+          <label htmlFor="confirmPassword">Confirm Password</label>
+          <input id="confirmPassword" type="password" name="confirmPassword" placeholder="Confirm Password"
+            value={formData.confirmPassword} onChange={handleChange} required />
+        </div>
 
-            <div className="login-link">
-              <Link to="/login">Already have an account? Login here.</Link>
-            </div>
-        </form>
+        <button type="submit" disabled={loading}>
+          {loading ? "Signing Up..." : "Sign Up"}
+        </button>
+
+        <div className="login-link">
+          <Link to="/login">Already have an account? Login here.</Link>
+        </div>
+      </form>
     </div>
   );
 };
