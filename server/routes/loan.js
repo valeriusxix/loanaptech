@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const Loan = require("../models/Loan");
+const Loan = require("../models/loan");
 const auth = require("../middleware/auth");
 
 // Apply for loan
