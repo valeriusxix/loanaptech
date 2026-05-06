@@ -4,6 +4,51 @@ import "./dashboard.css";
 
 const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
 
+const fetchDashboardData = async (setUser, setStats, setLoans, setLoading, setError, navigate) => {
+  try {
+    setLoading(true);
+
+    // Fetch current user
+    const userResponse = await fetch(`${API_URL}/api/auth/me`, {
+      credentials: "include",
+    });
+
+    if (!userResponse.ok) {
+      throw new Error("Not Authenticated");
+    }
+    const userData = await userResponse.json();
+    setUser(userData.user);
+
+    // Fetch stats
+    const statsResponse = await fetch(`${API_URL}/api/loans/dashboard/stats`, {
+      credentials: "include",
+    });
+
+    if (statsResponse.ok) {
+      const statsData = await statsResponse.json();
+      setStats(statsData.stats);
+    }
+
+    // Fetch loans
+    const loanResponse = await fetch(`${API_URL}/api/loans/my-loans`, {
+      credentials: "include",
+    });
+
+    if (loanResponse.ok) {
+      const loanData = await loanResponse.json();
+      setLoans(loanData.loans || []);
+    }
+  } catch (error) {
+    console.error("Dashboard fetch error:", error);
+    setError("Failed to load dashboard data");
+    if (error.message === "Not Authenticated") {
+      navigate("/login");
+    }
+  } finally {
+    setLoading(false);
+  }
+};
+
 const Dashboard = () => {
   const navigate = useNavigate();
   const [user, setUser] = useState(null);
@@ -13,51 +58,8 @@ const Dashboard = () => {
   const [error, setError] = useState("");
 
   useEffect(() => {
-    fetchDashboardData();
-  }, []);
-
-  const fetchDashboardData = async () => {
-    try {
-      setLoading(true);
-
-      // Fetch current user
-      const userResponse = await fetch(`${API_URL}/api/auth/me`, {
-        credentials: "include",
-      });
-
-      if (!userResponse.ok) {
-        throw new Error("Not Authenticated");
-      }
-      const userData = await userResponse.json();
-      setUser(userData.user); // fixed: was userData.User
-
-      // Fetch stats
-      const statsResponse = await fetch(`${API_URL}/api/loans/dashboard/stats`, {
-        credentials: "include",
-      });
-
-      if (statsResponse.ok) { // fixed: was !statsResponse.ok
-        const statsData = await statsResponse.json();
-        setStats(statsData.stats);
-      }
-
-      // Fetch loans
-      const loanResponse = await fetch(`${API_URL}/api/loans/my-loans`, { // fixed: wrong URL
-        credentials: "include",
-      });
-
-      if (loanResponse.ok) {
-        const loanData = await loanResponse.json();
-        setLoans(loanData.loans);
-      }
-
-    } catch (err) { // fixed: was (error) but used err.message
-      setError(err.message);
-      navigate("/login");
-    } finally {
-      setLoading(false);
-    }
-  };
+    fetchDashboardData(setUser, setStats, setLoans, setLoading, setError, navigate);
+  }, [navigate]);
 
   const handleLogout = async () => {
     try {

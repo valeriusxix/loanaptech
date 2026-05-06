@@ -1,11 +1,9 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import "./applyloan.css";
 
 const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
 
 const ApplyLoan = () => {
-  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     amount: '',
     tenure: '',
@@ -44,13 +42,10 @@ const ApplyLoan = () => {
     setIsLoading(true);
 
     try {
-      const user = JSON.parse(localStorage.getItem("user"));
-
       const response = await fetch(`${API_URL}/api/loans/apply`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "Authorization": `Bearer ${user?.token}`,
         },
         body: JSON.stringify({
           amount: formData.amount,
@@ -68,6 +63,7 @@ const ApplyLoan = () => {
         setError(data.error || "Submission failed. Please try again.");
       }
     } catch (err) {
+      console.error("Application error:", err);
       setError("An error occurred. Please try again.");
     } finally {
       setIsLoading(false);

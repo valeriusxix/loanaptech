@@ -2,21 +2,24 @@ import React, { useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import "./Navbar.css";
 
+const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
+
 function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   const location = useLocation();
   const navigate = useNavigate();
 
   useEffect(() => {
-
     checkAuth();
-  }, [location.pathname]); 
+  }, [location.pathname]);
 
   const checkAuth = async () => {
     try {
-      const response = await fetch("https://loanaptech-oezl.onrender.com/api/auth/me", {
+      setLoading(true);
+      const response = await fetch(`${API_URL}/api/auth/me`, {
         credentials: "include"
       });
 
@@ -26,8 +29,11 @@ function Navbar() {
       } else {
         setUser(null);
       }
-    } catch (error) {
+    } catch (_error) {
+      console.error("Auth check error:", _error);
       setUser(null);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -35,24 +41,22 @@ function Navbar() {
 
   const handleLogout = async () => {
     try {
-      await fetch("https://loanaptech-oezl.onrender.com/api/auth/logout", {
+      const response = await fetch(`${API_URL}/api/auth/logout`, {
         method: "POST",
         credentials: "include"
       });
 
-     if (res.ok) {
-      setUser(null);
-      navigate("/");
+      if (response.ok) {
+        setUser(null);
+        navigate("/");
       }
-      
     } catch (error) {
       console.error("Logout error:", error);
     }
   };
-const renderAuthLinks = () => {
+
   if (loading) return null;
 
-  if (user) {
   return (
     <nav className="navbar" aria-label="Main navigation">
       <div className="navbar-container">
@@ -125,8 +129,8 @@ const renderAuthLinks = () => {
           {/* Logout */}
           {user && (
             <li role="none">
-              <button 
-                onClick={handleLogout} 
+              <button
+                onClick={handleLogout}
                 className="logout-btn"
                 role="menuitem"
                 aria-label="Logout from your account"
@@ -152,7 +156,7 @@ const renderAuthLinks = () => {
       </div>
 
       {/* Mobile Menu */}
-      <div 
+      <div
         id="mobile-menu"
         className={`mobile-menu ${mobileMenuOpen ? "open" : ""}`}
         role="navigation"
@@ -213,9 +217,6 @@ const renderAuthLinks = () => {
       </div>
     </nav>
   );
-};
-
-};
-};
+}
 
 export default Navbar;

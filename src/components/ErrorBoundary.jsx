@@ -5,23 +5,23 @@ class ErrorBoundary extends React.Component {
     super(props);
     this.state = {
       hasError: false,
-      error: null,
       errorInfo: null,
       errorCount: 0
     };
   }
 
-  static getDerivedStateFromError(error) {
+  // eslint-disable-next-line no-unused-vars
+  static getDerivedStateFromError(_error) {
     return { hasError: true };
   }
 
-  componentDidCatch(error, errorInfo) {
-    // Log error for debugging
-    console.error('Error caught by boundary:', error);
+  componentDidCatch(_error, errorInfo) {
+    // Log error for debugging (error is logged via console.error)
+    console.error('Error caught by boundary:', _error);
     console.error('Error info:', errorInfo);
 
     this.setState(prevState => ({
-      error,
+      error: _error,
       errorInfo,
       errorCount: prevState.errorCount + 1
     }));
@@ -66,7 +66,7 @@ class ErrorBoundary extends React.Component {
               We're sorry for the inconvenience. An unexpected error has occurred.
             </p>
 
-            {process.env.NODE_ENV === 'development' && this.state.error && (
+            {import.meta.env.DEV && this.state.error && (
               <details style={{
                 textAlign: 'left',
                 marginBottom: '20px',
