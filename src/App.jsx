@@ -9,7 +9,6 @@ import Terms from "./components/Term";
 import Faq from "./components/Faq";
 import Home from "./pages/Home";
 import Navbar from "./components/navbar";
-import Apply from "./components/apply";
 import Signup from "./pages/signup";
 import ApplyLoan from "./pages/applyloan";
 

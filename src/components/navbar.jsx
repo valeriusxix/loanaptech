@@ -49,7 +49,10 @@ function Navbar() {
       console.error("Logout error:", error);
     }
   };
+const renderAuthLinks = () => {
+  if (loading) return null;
 
+  if (user) {
   return (
     <nav className="navbar" aria-label="Main navigation">
       <div className="navbar-container">
@@ -210,6 +213,9 @@ function Navbar() {
       </div>
     </nav>
   );
-}
+};
+
+};
+};
 
 export default Navbar;
