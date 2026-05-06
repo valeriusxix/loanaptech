@@ -16,7 +16,7 @@ function Navbar() {
 
   const checkAuth = async () => {
     try {
-      const response = await fetch("http://localhost:5000/api/auth/me", {
+      const response = await fetch("https://loanaptech-oezl.onrender.com/api/auth/me", {
         credentials: "include"
       });
 
@@ -35,13 +35,16 @@ function Navbar() {
 
   const handleLogout = async () => {
     try {
-      await fetch("http://localhost:5000/api/auth/logout", {
+      await fetch("https://loanaptech-oezl.onrender.com/api/auth/logout", {
         method: "POST",
         credentials: "include"
       });
 
+     if (res.ok) {
       setUser(null);
       navigate("/");
+      }
+      
     } catch (error) {
       console.error("Logout error:", error);
     }
