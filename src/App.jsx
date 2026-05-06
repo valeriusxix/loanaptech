@@ -1,13 +1,13 @@
 import React from "react";
 import "./App.css";
 import About from "./components/About";
-import Footer from "./components/Footer";
-import Contact from "./components/Contact";
-import Privacy from "./components/Privacy";
+import footer from "./components/footer";
+import contact from "./components/contact";
+import privacy from "./components/privacy";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import Term from "./components/Term";
-import Faq from "./components/Faq";
-import Home from "./pages/Home";
+import term from "./components/term";
+import faq from "./components/faq";
+import Home from "./pages/home";
 import Navbar from "./components/navbar";
 import Signup from "./pages/signup";
 import ApplyLoan from "./pages/applyloan";
@@ -16,7 +16,7 @@ import Dashboard from "./pages/dashboard";
 import ErrorBoundary from "./components/ErrorBoundary";
 
 
-export default function APP() {
+export default function App() {
   return (
     <ErrorBoundary>
       <Router>
@@ -25,18 +25,18 @@ export default function APP() {
           <main style={{ minHeight: '100vh', paddingTop: '80px' }}>
             <Routes>
               <Route path="/" element={<Home />} />
-              <Route path="/Contact" element={<Contact />} />
+              <Route path="/contact" element={<contact />} />
               <Route path="/about" element={<About />} />
-              <Route path="/Privacy" element={<Privacy />} />
-              <Route path="/Term" element={<Term />} />
-              <Route path="/Faq" element={<Faq />} />
+              <Route path="/privacy" element={<privacy />} />
+              <Route path="/term" element={<term />} />
+              <Route path="/faq" element={<faq />} />
               <Route path="/applyloan" element={<ApplyLoan />} />
               <Route path="/signup" element={<Signup />} />
               <Route path="/login" element={<Login />} />
               <Route path="/dashboard" element={<Dashboard />} />
             </Routes>
           </main>
-          <Footer />
+          <footer />
         </div>
       </Router>
     </ErrorBoundary>

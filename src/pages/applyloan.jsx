@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import "../components/navbar.jsx";
 import "./applyloan.css";
 
 const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";

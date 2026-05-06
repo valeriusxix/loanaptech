@@ -95,7 +95,7 @@ function Navbar() {
           {/* Logged-in only */}
           {user && (
             <li role="none">
-              <Link to="/apply" className={isActive("/apply") ? "nav-link active" : "nav-link"} role="menuitem">
+              <Link to="/applyloan" className={isActive("/applyloan") ? "nav-link active" : "nav-link"} role="menuitem">
                 Apply Now
               </Link>
             </li>
@@ -179,7 +179,7 @@ function Navbar() {
         </Link>
 
         {user && (
-          <Link to="/apply" className="mobile-link" onClick={() => setMobileMenuOpen(false)}>
+          <Link to="/applyloan" className="mobile-link" onClick={() => setMobileMenuOpen(false)}>
             Apply Now
           </Link>
         )}
