@@ -1,7 +1,7 @@
 import React from "react";
 import "./privacy.css";
 
-const privacy = () => {
+const Privacy = () => {
     return(
         <div className="privacy-page">
             <div className="privacy-container">
@@ -68,4 +68,4 @@ const privacy = () => {
     )
 };
 
-export default privacy;
+export default Privacy;
