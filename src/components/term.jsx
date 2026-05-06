@@ -1,13 +1,13 @@
 import React from 'react';
-import './Terms.css';
+import './Term.css';
 
- function Terms () {
+ function Term () {
     return(
-        <div className='terms-page'>
-            <div className='terms-container'>
+        <div className='term-page'>
+            <div className='term-container'>
                 <h1>Terms of Service</h1>
                 <p className='update-date'><em>Last updated: December 10, 2025</em></p>
-                <div className="terms-content">
+                <div className="term-content">
                     <section>
                         <h2>1. Acceptance of Terms</h2>
                         <p>
@@ -45,4 +45,4 @@ import './Terms.css';
     );
 }
 
-export default Terms;
+export default Term;

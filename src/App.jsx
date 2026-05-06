@@ -22,11 +22,11 @@ export default function APP() {
           <main style={{ minHeight: '100vh', paddingTop: '80px' }}>
             <Routes>
               <Route path="/" element={<Home />} />
-              <Route path="/contact" element={<Contact />} />
+              <Route path="/Contact" element={<Contact />} />
               <Route path="/about" element={<About />} />
-              <Route path="/privacy" element={<Privacy />} />
-              <Route path="/terms" element={<Terms />} />
-              <Route path="/faq" element={<Faq />} />
+              <Route path="/Privacy" element={<Privacy />} />
+              <Route path="/Term" element={<Term />} />
+              <Route path="/Faq" element={<Faq />} />
               <Route path="/applyloan" element={<ApplyLoan />} />
               <Route path="/signup" element={<Signup />} />
             </Routes>
