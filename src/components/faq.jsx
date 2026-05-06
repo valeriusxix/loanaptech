@@ -1,7 +1,7 @@
 import React from 'react';
 import './faq.css';
 
-export default function Faq() {
+export default function faq() {
     return(
         <div className='faq-page'>
             <div className='faq-container'>

@@ -1,7 +1,7 @@
 import React from 'react';
 import './term.css';
 
- function Term () {
+ function term () {
     return(
         <div className='term-page'>
             <div className='term-container'>
@@ -45,4 +45,4 @@ import './term.css';
     );
 }
 
-export default Term;
+export default term;
