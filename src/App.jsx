@@ -14,6 +14,7 @@ import Signup from "./pages/signup";
 import ApplyLoan from "./pages/applyloan";
 import Login from "./pages/login";
 import Dashboard from "./pages/dashboard";
+import LoanDetails from "./pages/loandetails";
 
 export default function App() {
   return (
@@ -33,6 +34,7 @@ export default function App() {
               <Route path="/signup" element={<Signup />} />
               <Route path="/login" element={<Login />} />
               <Route path="/dashboard" element={<Dashboard />} />
+              <Route path="/loan/:id" element= {<LoanDetails/>} />
             </Routes>
           </main>
           <Footer />
